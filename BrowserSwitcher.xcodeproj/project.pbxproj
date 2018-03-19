@@ -10,15 +10,19 @@
 		EE6466E3205FC40000BE0F34 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6466E2205FC40000BE0F34 /* AppDelegate.swift */; };
 		EE6466E5205FC40000BE0F34 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE6466E4205FC40000BE0F34 /* Assets.xcassets */; };
 		EE6466E8205FC40000BE0F34 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE6466E6205FC40000BE0F34 /* MainMenu.xib */; };
+		EE6466F1205FCA4400BE0F34 /* Browser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6466F0205FCA4400BE0F34 /* Browser.swift */; };
+		EE6466F3205FCDC400BE0F34 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6466F2205FCDC400BE0F34 /* Configuration.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		EE6466DF205FC40000BE0F34 /* BrowserPicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BrowserPicker.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE6466DF205FC40000BE0F34 /* BrowserSwitcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BrowserSwitcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE6466E2205FC40000BE0F34 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EE6466E4205FC40000BE0F34 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EE6466E7205FC40000BE0F34 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		EE6466E9205FC40000BE0F34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EE6466EA205FC40000BE0F34 /* BrowserPicker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BrowserPicker.entitlements; sourceTree = "<group>"; };
+		EE6466EA205FC40000BE0F34 /* BrowserSwitcher.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BrowserSwitcher.entitlements; sourceTree = "<group>"; };
+		EE6466F0205FCA4400BE0F34 /* Browser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Browser.swift; sourceTree = "<group>"; };
+		EE6466F2205FCDC400BE0F34 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,7 +39,7 @@
 		EE6466D6205FC40000BE0F34 = {
 			isa = PBXGroup;
 			children = (
-				EE6466E1205FC40000BE0F34 /* BrowserPicker */,
+				EE6466E1205FC40000BE0F34 /* BrowserSwitcher */,
 				EE6466E0205FC40000BE0F34 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -43,29 +47,31 @@
 		EE6466E0205FC40000BE0F34 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EE6466DF205FC40000BE0F34 /* BrowserPicker.app */,
+				EE6466DF205FC40000BE0F34 /* BrowserSwitcher.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		EE6466E1205FC40000BE0F34 /* BrowserPicker */ = {
+		EE6466E1205FC40000BE0F34 /* BrowserSwitcher */ = {
 			isa = PBXGroup;
 			children = (
 				EE6466E2205FC40000BE0F34 /* AppDelegate.swift */,
+				EE6466F0205FCA4400BE0F34 /* Browser.swift */,
+				EE6466F2205FCDC400BE0F34 /* Configuration.swift */,
 				EE6466E4205FC40000BE0F34 /* Assets.xcassets */,
 				EE6466E6205FC40000BE0F34 /* MainMenu.xib */,
 				EE6466E9205FC40000BE0F34 /* Info.plist */,
-				EE6466EA205FC40000BE0F34 /* BrowserPicker.entitlements */,
+				EE6466EA205FC40000BE0F34 /* BrowserSwitcher.entitlements */,
 			);
-			path = BrowserPicker;
+			path = BrowserSwitcher;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		EE6466DE205FC40000BE0F34 /* BrowserPicker */ = {
+		EE6466DE205FC40000BE0F34 /* BrowserSwitcher */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = EE6466ED205FC40000BE0F34 /* Build configuration list for PBXNativeTarget "BrowserPicker" */;
+			buildConfigurationList = EE6466ED205FC40000BE0F34 /* Build configuration list for PBXNativeTarget "BrowserSwitcher" */;
 			buildPhases = (
 				EE6466DB205FC40000BE0F34 /* Sources */,
 				EE6466DC205FC40000BE0F34 /* Frameworks */,
@@ -75,9 +81,9 @@
 			);
 			dependencies = (
 			);
-			name = BrowserPicker;
+			name = BrowserSwitcher;
 			productName = BrowserPicker;
-			productReference = EE6466DF205FC40000BE0F34 /* BrowserPicker.app */;
+			productReference = EE6466DF205FC40000BE0F34 /* BrowserSwitcher.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -96,7 +102,7 @@
 					};
 				};
 			};
-			buildConfigurationList = EE6466DA205FC40000BE0F34 /* Build configuration list for PBXProject "BrowserPicker" */;
+			buildConfigurationList = EE6466DA205FC40000BE0F34 /* Build configuration list for PBXProject "BrowserSwitcher" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -109,7 +115,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				EE6466DE205FC40000BE0F34 /* BrowserPicker */,
+				EE6466DE205FC40000BE0F34 /* BrowserSwitcher */,
 			);
 		};
 /* End PBXProject section */
@@ -131,7 +137,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE6466F1205FCA4400BE0F34 /* Browser.swift in Sources */,
 				EE6466E3205FC40000BE0F34 /* AppDelegate.swift in Sources */,
+				EE6466F3205FCDC400BE0F34 /* Configuration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,13 +267,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = BrowserPicker/BrowserPicker.entitlements;
+				CODE_SIGN_ENTITLEMENTS = BrowserSwitcher/BrowserSwitcher.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEPLOYMENT_LOCATION = YES;
 				DEVELOPMENT_TEAM = JGMFM42JM6;
-				INFOPLIST_FILE = BrowserPicker/Info.plist;
+				DSTROOT = "";
+				INFOPLIST_FILE = BrowserSwitcher/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.0bmxa.BrowserPicker;
+				PRODUCT_BUNDLE_IDENTIFIER = com.0bmxa.BrowserSwitcher;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 			};
@@ -275,13 +285,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = BrowserPicker/BrowserPicker.entitlements;
+				CODE_SIGN_ENTITLEMENTS = BrowserSwitcher/BrowserSwitcher.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEPLOYMENT_LOCATION = YES;
 				DEVELOPMENT_TEAM = JGMFM42JM6;
-				INFOPLIST_FILE = BrowserPicker/Info.plist;
+				DSTROOT = "";
+				INFOPLIST_FILE = BrowserSwitcher/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.0bmxa.BrowserPicker;
+				PRODUCT_BUNDLE_IDENTIFIER = com.0bmxa.BrowserSwitcher;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 			};
@@ -290,7 +302,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		EE6466DA205FC40000BE0F34 /* Build configuration list for PBXProject "BrowserPicker" */ = {
+		EE6466DA205FC40000BE0F34 /* Build configuration list for PBXProject "BrowserSwitcher" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EE6466EB205FC40000BE0F34 /* Debug */,
@@ -299,7 +311,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EE6466ED205FC40000BE0F34 /* Build configuration list for PBXNativeTarget "BrowserPicker" */ = {
+		EE6466ED205FC40000BE0F34 /* Build configuration list for PBXNativeTarget "BrowserSwitcher" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EE6466EE205FC40000BE0F34 /* Debug */,
