@@ -15,7 +15,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var config: Configuration = Configuration.fromDisk
 
     func applicationWillFinishLaunching(_ notification: Notification) {
-        
         // Some custom config
         let spotify = Browser(bundleIdentifier: "com.spotify.client")
         self.config = Configuration(defaultBrowser: .safari, exceptions: [
@@ -25,12 +24,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         ])
         
         NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(self.handleGetURLEvent), forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL))
+        NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(self.handleAppOpen), forEventClass: kCoreEventClass, andEventID: kAEOpenApplication)
+    }
+
+    /// Handles manual app launches
+    @objc func handleAppOpen(event: NSAppleEventDescriptor, replyEvent: NSAppleEventDescriptor) {
+        self.window.setIsVisible(true)
     }
 }
 
 
 // MARK: - URL opening
 extension AppDelegate {
+    /// Handles launches via URL
     @objc func handleGetURLEvent(event: NSAppleEventDescriptor, replyEvent: NSAppleEventDescriptor) {
         // No matter how we exit, always close app
         defer { NSApp.terminate(nil) }

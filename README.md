@@ -29,11 +29,10 @@ modify the file file and rebuild the project.
 
 ## ToDo
 
+- [x] Add some pattern matching to the exception list to support basic wildcards like `*.google.com`
+- [x] Don't open the window when app is opened via URL
 - [ ] Obviously make the browsers and URLs changeable from UI
 - [ ] Then also store settings on disk
-- [ ] ~~Rename `exceltionURLs` to `exceptionHosts`~~
-- [x] Maybe add some pattern matching to the exception list to support basic wildcards like `*.google.com`
 - [ ] Ask for "Do you want to set this app as your default browser"
 - [ ] Maybe an icon
-- [ ] Dont open (or dalay opening) of the window on url clicking
 - [ ] …
