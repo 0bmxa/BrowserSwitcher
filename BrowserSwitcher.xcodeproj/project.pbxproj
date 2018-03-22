@@ -12,6 +12,7 @@
 		EE6466E8205FC40000BE0F34 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE6466E6205FC40000BE0F34 /* MainMenu.xib */; };
 		EE6466F1205FCA4400BE0F34 /* Browser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6466F0205FCA4400BE0F34 /* Browser.swift */; };
 		EE6466F3205FCDC400BE0F34 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6466F2205FCDC400BE0F34 /* Configuration.swift */; };
+		EE8ED4962062F2D2005962E3 /* ExceptionHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8ED4952062F2D2005962E3 /* ExceptionHost.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		EE6466EA205FC40000BE0F34 /* BrowserSwitcher.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BrowserSwitcher.entitlements; sourceTree = "<group>"; };
 		EE6466F0205FCA4400BE0F34 /* Browser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Browser.swift; sourceTree = "<group>"; };
 		EE6466F2205FCDC400BE0F34 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		EE8ED4952062F2D2005962E3 /* ExceptionHost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExceptionHost.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 				EE6466E2205FC40000BE0F34 /* AppDelegate.swift */,
 				EE6466F0205FCA4400BE0F34 /* Browser.swift */,
 				EE6466F2205FCDC400BE0F34 /* Configuration.swift */,
+				EE8ED4952062F2D2005962E3 /* ExceptionHost.swift */,
 				EE6466E4205FC40000BE0F34 /* Assets.xcassets */,
 				EE6466E6205FC40000BE0F34 /* MainMenu.xib */,
 				EE6466E9205FC40000BE0F34 /* Info.plist */,
@@ -140,6 +143,7 @@
 				EE6466F1205FCA4400BE0F34 /* Browser.swift in Sources */,
 				EE6466E3205FC40000BE0F34 /* AppDelegate.swift in Sources */,
 				EE6466F3205FCDC400BE0F34 /* Configuration.swift in Sources */,
+				EE8ED4962062F2D2005962E3 /* ExceptionHost.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
