@@ -6,28 +6,8 @@
 //  Copyright © 2018 0bmxa. All rights reserved.
 //
 
-//import Foundation
-
-enum Browser {
-    case chrome
-    case safari
-    case other(bundleIdentifier: String)
-    
-    var bundleIdentifier: String {
-        switch self {
-        case .chrome: return "com.google.Chrome"
-        case .safari: return "com.apple.Safari"
-        case .other(let bundleIdentifier): return bundleIdentifier
-        }
-    }
-    
-    init(bundleIdentifier: String) {
-        switch bundleIdentifier {
-        case "com.google.Chrome": self = .chrome
-        case "com.apple.Safari":  self = .safari
-        default:                  self = .other(bundleIdentifier: bundleIdentifier)
-        }
-    }
+struct Browser {
+    let bundleIdentifier: String
 }
 
 extension Browser: Hashable {
@@ -38,4 +18,12 @@ extension Browser: Hashable {
     static func ==(lhs: Browser, rhs: Browser) -> Bool {
         return lhs.hashValue  == rhs.hashValue
     }
+}
+
+
+// MARK: - Some common preconfigured browsers
+extension Browser {
+    static var chrome: Browser  = Browser(bundleIdentifier: "com.google.Chrome")
+    static var firefox: Browser = Browser(bundleIdentifier: "org.mozilla.firefox")
+    static var safari: Browser  = Browser(bundleIdentifier: "com.apple.Safari")
 }
