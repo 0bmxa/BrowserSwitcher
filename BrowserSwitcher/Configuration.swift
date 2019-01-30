@@ -14,6 +14,35 @@ struct Configuration {
     
     /// A list containing exceptions for the default browser.
     let exceptions: [ExceptionHost]
+
+    /// Storage changeable for testing
+    private var storage = UserDefaults.standard
+
+    /// Storage keys (for User Defaults)
+    private let kDefaultBrowserStorageKey = "defaultBrowser"
+    private let kExceptionHostsStorageKey = "exceptions"
+    
+    init(defaultBrowser: Browser, exceptions: [ExceptionHost]) {
+        self.defaultBrowser = defaultBrowser
+        self.exceptions = exceptions
+    }
+
+    init(fromDisk: Bool = true) {
+        var defaultBrowser: Browser = .firefox
+        var exceptionHosts: [ExceptionHost] = []
+        
+        if fromDisk {
+            if let defaultBrowserBundleID = self.storage.string(forKey: kDefaultBrowserStorageKey) {
+                defaultBrowser = Browser(bundleIdentifier: defaultBrowserBundleID)
+            }
+            if let exceptions = self.storage.array(forKey: kExceptionHostsStorageKey) as? [ExceptionHost] {
+                exceptionHosts = exceptions
+            }
+        }
+
+        self.defaultBrowser = defaultBrowser
+        self.exceptions = exceptionHosts
+    }
 }
 
 
@@ -21,15 +50,12 @@ struct Configuration {
 extension Configuration {
     /// Writes the Configuration object to disk
     func writeToDisk() {
-        UserDefaults.standard.set(self.defaultBrowser, forKey: "defaultBrowser")
-        UserDefaults.standard.set(self.exceptions, forKey: "exceptions")
+        self.storage.set(self.defaultBrowser.bundleIdentifier, forKey: kDefaultBrowserStorageKey)
+        self.storage.set(self.exceptions, forKey: kExceptionHostsStorageKey)
     }
     
     /// Creates a new Configuration object based on the one stored on disk
     static var fromDisk: Configuration {
-        let defaultBrowser: Browser = UserDefaults.standard.object(forKey: "defaultBrowser") as? Browser ?? .safari
-        let exceptions = UserDefaults.standard.object(forKey: "exceptions") as? [ExceptionHost] ?? [ExceptionHost]()
-        
-        return Configuration(defaultBrowser: defaultBrowser, exceptions: exceptions)
+        return Configuration(fromDisk: true)
     }
 }
