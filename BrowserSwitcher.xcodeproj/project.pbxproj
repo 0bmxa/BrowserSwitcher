@@ -276,7 +276,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEPLOYMENT_LOCATION = YES;
 				DEVELOPMENT_TEAM = JGMFM42JM6;
-				DSTROOT = "";
+				DSTROOT = /;
 				INFOPLIST_FILE = BrowserSwitcher/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.0bmxa.BrowserSwitcher;
@@ -294,7 +294,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEPLOYMENT_LOCATION = YES;
 				DEVELOPMENT_TEAM = JGMFM42JM6;
-				DSTROOT = "";
+				DSTROOT = /;
 				INFOPLIST_FILE = BrowserSwitcher/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.0bmxa.BrowserSwitcher;
