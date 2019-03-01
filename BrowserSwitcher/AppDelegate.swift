@@ -17,11 +17,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillFinishLaunching(_ notification: Notification) {
         // Some custom config
         let spotify = Browser(bundleIdentifier: "com.spotify.client")
-        self.config = Configuration(defaultBrowser: .safari, exceptions: [
-            ExceptionHost(host: "*.google.com", browser: .chrome, transformation: nil),
-            ExceptionHost(host: "app.asana.com", browser: .chrome, transformation: nil),
+        let exceptions: [ExceptionHost] = [
+            ExceptionHost(host: "*.google.com", browser: .chrome),
+            ExceptionHost(host: "goo.gl", browser: .chrome),
             ExceptionHost(host: "open.spotify.com", browser: spotify, transformation: (search: "https://open.spotify.com/", replace: "spotify:")),
-        ])
+            ExceptionHost(host: "m.facebook.com", transformation: (search: "m.facebook.com", replace: "facebook.com"))
+        ]
+        self.config = Configuration(defaultBrowser: .firefox, exceptions: exceptions)
         
         NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(self.handleGetURLEvent), forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL))
         NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(self.handleAppOpen), forEventClass: kCoreEventClass, andEventID: kAEOpenApplication)
@@ -49,14 +51,17 @@ extension AppDelegate {
         else { return }
         
         // If current host is not in the list of exceptions, open default browser
-        guard let host = url.host, let specialURL = self.config.exceptions.first(where: { $0.hostEquals(host) }) else {
+        guard
+            let host = url.host,
+            let exception = self.config.exceptions.first(where: { $0.hostEquals(host) })
+        else {
             self.open(url: url, with: self.config.defaultBrowser)
             return
         }
         
         
         // Apply URL transformation, if defined
-        if let transformation = specialURL.transformation {
+        if let transformation = exception.transformation {
             let newURLString = urlString.replacingOccurrences(of: transformation.search, with: transformation.replace)
             if let newURL = URL(string: newURLString) {
                 url = newURL
@@ -64,7 +69,8 @@ extension AppDelegate {
         }
         
         // Open browser
-        self.open(url: url, with: specialURL.browser)
+        let browser = exception.browser ?? self.config.defaultBrowser
+        self.open(url: url, with: browser)
     }
     
     /// Handles launches with a local document
@@ -75,7 +81,7 @@ extension AppDelegate {
         // Get URL from event
         guard
             let urlString = event.paramDescriptor(forKeyword: keyDirectObject)?.stringValue,
-            var url = URL(string: urlString)
+            let url = URL(string: urlString)
         else { return }
 
         // Open default browser

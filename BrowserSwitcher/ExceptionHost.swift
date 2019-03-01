@@ -8,14 +8,36 @@
 
 /// Describes a host for which an exception to the default browser should be made.
 struct ExceptionHost {
+    /// A convenience type for describing a simple search-replace
+    /// URL transformation.
+    typealias TransformationDescription = (search: String, replace: String)
+
     /// The hostname in the URL for which the exception applies.
     let host: String
     
     /// The browser to be used for this exception.
-    let browser: Browser
+    let browser: Browser?
     
     /// Optional: A search-replace transformation to be applied to the URL.
-    let transformation: (search: String, replace: String)?
+    let transformation: TransformationDescription?
+    
+    init(host: String, browser: Browser) {
+        self.host = host
+        self.browser = browser
+        self.transformation = nil
+    }
+
+    init(host: String, transformation: TransformationDescription) {
+        self.host = host
+        self.browser = nil
+        self.transformation = transformation
+    }
+
+    init(host: String, browser: Browser, transformation: TransformationDescription) {
+        self.host = host
+        self.browser = browser
+        self.transformation = transformation
+    }
 }
 
 extension ExceptionHost {
