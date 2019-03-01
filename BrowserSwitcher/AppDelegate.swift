@@ -25,6 +25,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(self.handleGetURLEvent), forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL))
         NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(self.handleAppOpen), forEventClass: kCoreEventClass, andEventID: kAEOpenApplication)
+        NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(self.handleFileOpen), forEventClass: kCoreEventClass, andEventID: kAEOpenDocuments)
     }
 
     /// Handles manual app launches
@@ -64,6 +65,21 @@ extension AppDelegate {
         
         // Open browser
         self.open(url: url, with: specialURL.browser)
+    }
+    
+    /// Handles launches with a local document
+    @objc func handleFileOpen(event: NSAppleEventDescriptor, replyEvent: NSAppleEventDescriptor) {
+        // No matter how we exit, always close app
+        defer { NSApp.terminate(nil) }
+        
+        // Get URL from event
+        guard
+            let urlString = event.paramDescriptor(forKeyword: keyDirectObject)?.stringValue,
+            var url = URL(string: urlString)
+        else { return }
+
+        // Open default browser
+        self.open(url: url, with: self.config.defaultBrowser)
     }
     
     
