@@ -13,6 +13,7 @@
 		EE6466F1205FCA4400BE0F34 /* Browser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6466F0205FCA4400BE0F34 /* Browser.swift */; };
 		EE6466F3205FCDC400BE0F34 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6466F2205FCDC400BE0F34 /* Configuration.swift */; };
 		EE8ED4962062F2D2005962E3 /* ExceptionHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8ED4952062F2D2005962E3 /* ExceptionHost.swift */; };
+		EEF379A5224BC64500BA36CC /* EventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF379A4224BC64500BA36CC /* EventHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		EE6466F0205FCA4400BE0F34 /* Browser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Browser.swift; sourceTree = "<group>"; };
 		EE6466F2205FCDC400BE0F34 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		EE8ED4952062F2D2005962E3 /* ExceptionHost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExceptionHost.swift; sourceTree = "<group>"; };
+		EEF379A4224BC64500BA36CC /* EventHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 			isa = PBXGroup;
 			children = (
 				EE6466E2205FC40000BE0F34 /* AppDelegate.swift */,
+				EEF379A4224BC64500BA36CC /* EventHandler.swift */,
 				EE6466F0205FCA4400BE0F34 /* Browser.swift */,
 				EE6466F2205FCDC400BE0F34 /* Configuration.swift */,
 				EE8ED4952062F2D2005962E3 /* ExceptionHost.swift */,
@@ -144,6 +147,7 @@
 				EE6466E3205FC40000BE0F34 /* AppDelegate.swift in Sources */,
 				EE6466F3205FCDC400BE0F34 /* Configuration.swift in Sources */,
 				EE8ED4962062F2D2005962E3 /* ExceptionHost.swift in Sources */,
+				EEF379A5224BC64500BA36CC /* EventHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
