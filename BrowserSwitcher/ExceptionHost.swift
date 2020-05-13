@@ -59,8 +59,10 @@ extension ExceptionHost {
         
         // Iterate over the reference list (of host parts) in reverse order and compare
         // whether they are similar or the "wildcard" operator
-        referenceHostParts.enumerated().reversed().forEach { (offset: Int, element: String) in
-            let inputElement = inputHostParts[offset]
+        let reversedReferenceHostParts: [String] = referenceHostParts.reversed()
+        let reversedInputHostParts: [String] = inputHostParts.reversed()
+        reversedReferenceHostParts.enumerated().forEach { (offset: Int, element: String) in
+            let inputElement = reversedInputHostParts[offset]
             if element != "*" && element != inputElement {
                 hostsMatch = false
                 return
