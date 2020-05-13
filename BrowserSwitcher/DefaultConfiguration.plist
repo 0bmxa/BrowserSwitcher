@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ExceptionHosts</key>
+	<array>
+		<dict>
+			<key>host</key>
+			<string>*.google.com</string>
+			<key>browser</key>
+			<string>.chrome</string>
+		</dict>
+		<dict>
+			<key>host</key>
+			<string>goo.gl</string>
+			<key>browser</key>
+			<string>.chrome</string>
+		</dict>
+		<dict>
+			<key>host</key>
+			<string>open.spotify.com</string>
+			<key>browser</key>
+			<string>spotify</string>
+			<key>transformation</key>
+			<dict>
+				<key>search</key>
+				<string>https://open.spotify.com/</string>
+				<key>replace</key>
+				<string>spotify:</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>host</key>
+			<string>m.facebook.com</string>
+			<key>transformation</key>
+			<dict>
+				<key>search</key>
+				<string>m.facebook.com</string>
+				<key>replace</key>
+				<string>facebook.com</string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>
