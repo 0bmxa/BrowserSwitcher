@@ -54,7 +54,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 // MARK: - "Window controller"
 extension AppDelegate {
     
-    @available(OSX 10.10, *)
     private func removeTitleBar() {
         guard let window = self.window else { return }
         
