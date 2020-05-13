@@ -54,6 +54,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
+    /// Registers the app as default handler for http: and https: url schemes
     internal func registerDefaultBrowser() {
         guard let bundleID = Bundle.main.bundleIdentifier else { assertionFailure(); return }
         
@@ -61,16 +62,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         LSSetDefaultHandlerForURLScheme("https" as CFString, bundleID as CFString)
     }
     
+    /// Checks whether the app is registered as default handler for http: and https: url schemes
     internal func isDefaultBrowser() -> Bool {
         guard let bundleID = Bundle.main.bundleIdentifier else { assertionFailure(); return false }
 
-        let httpHandlers  = LSCopyAllHandlersForURLScheme("http"  as CFString)?.takeRetainedValue()
-        let httpsHandlers = LSCopyAllHandlersForURLScheme("https" as CFString)?.takeRetainedValue()
-        
-        let isDefaultHTTPHandler = httpHandlers?.contains(bundleID as CFString) ?? false
-        let isDefaultHTTPSHandler = httpsHandlers?.contains(bundleID as CFString) ?? false
+        let defaultHTTPHandler  = LSCopyDefaultHandlerForURLScheme("http"  as CFString)?.takeRetainedValue()
+        let defaultHTTPSHandler = LSCopyDefaultHandlerForURLScheme("https" as CFString)?.takeRetainedValue()
 
-        return isDefaultHTTPHandler && isDefaultHTTPSHandler
+        let cfBundleID = bundleID as CFString
+        return (defaultHTTPHandler == cfBundleID) && (defaultHTTPSHandler == cfBundleID)
     }
 }
 
