@@ -8,6 +8,7 @@
 
 struct Browser {
     let bundleIdentifier: String
+    //let name: String
 }
 
 extension Browser: Hashable {
