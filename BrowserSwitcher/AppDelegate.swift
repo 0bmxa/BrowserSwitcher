@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import Carbon
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -28,6 +29,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @objc func handleAppOpen(event: NSAppleEventDescriptor, replyEvent: NSAppleEventDescriptor) {
         self.appWasLaunchedManually = true
         self.showWindow()
+        
+        if !self.isDefaultBrowser() {
+            self.registerDefaultBrowser()
+        }
     }
     
     /// Quits the app, if it was lanuched from an event
@@ -47,6 +52,25 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if #available(OSX 10.11, *) {
             self.addTransparency()
         }
+    }
+    
+    internal func registerDefaultBrowser() {
+        guard let bundleID = Bundle.main.bundleIdentifier else { assertionFailure(); return }
+        
+        LSSetDefaultHandlerForURLScheme("http"  as CFString, bundleID as CFString)
+        LSSetDefaultHandlerForURLScheme("https" as CFString, bundleID as CFString)
+    }
+    
+    internal func isDefaultBrowser() -> Bool {
+        guard let bundleID = Bundle.main.bundleIdentifier else { assertionFailure(); return false }
+
+        let httpHandlers  = LSCopyAllHandlersForURLScheme("http"  as CFString)?.takeRetainedValue()
+        let httpsHandlers = LSCopyAllHandlersForURLScheme("https" as CFString)?.takeRetainedValue()
+        
+        let isDefaultHTTPHandler = httpHandlers?.contains(bundleID as CFString) ?? false
+        let isDefaultHTTPSHandler = httpsHandlers?.contains(bundleID as CFString) ?? false
+
+        return isDefaultHTTPHandler && isDefaultHTTPSHandler
     }
 }
 
