@@ -8,54 +8,73 @@
 
 import Foundation
 
-struct Configuration {
-    /// The browser to be opened for all non-exception URLs.
-    let defaultBrowser: Browser
+struct Configuration: Codable {
+    /// The bundle ID for the default browser.
+    let defaultBrowserBundleID: String
+    /// An array of exceptions to the default opening behavior.
+    let exceptions: [Exception]
     
-    /// A list containing exceptions for the default browser.
-    let exceptions: [ExceptionHost]
-
-    /// Storage changeable for testing
-    private var storage = UserDefaults.standard
-
-    /// Storage keys (for User Defaults)
-    private let kDefaultBrowserStorageKey = "defaultBrowser"
-    private let kExceptionHostsStorageKey = "exceptions"
-    
-    init(defaultBrowser: Browser, exceptions: [ExceptionHost]) {
-        self.defaultBrowser = defaultBrowser
+    /// Creates a new configuration.
+    /// - Parameters:
+    ///   - defaultBrowserBundleID: The bundle ID for the default browser.
+    ///   - exceptions: An array of exceptions to the default opening behavior.
+    init(defaultBrowserBundleID: String, exceptions: [Exception]) {
+        self.defaultBrowserBundleID = defaultBrowserBundleID
         self.exceptions = exceptions
     }
+    
+    /// Reads an existing configuration from a PropertyList file.
+    /// - Parameter fileURL: A file URL to the PList on disk.
+    init(from fileURL: URL) throws {
+        let decoder = PropertyListDecoder()
 
-    init(fromDisk: Bool = true) {
-        var defaultBrowser: Browser = .firefox
-        var exceptionHosts: [ExceptionHost] = []
-        
-        if fromDisk {
-            if let defaultBrowserBundleID = self.storage.string(forKey: kDefaultBrowserStorageKey) {
-                defaultBrowser = Browser(bundleIdentifier: defaultBrowserBundleID)
-            }
-            if let exceptions = self.storage.array(forKey: kExceptionHostsStorageKey) as? [ExceptionHost] {
-                exceptionHosts = exceptions
-            }
-        }
+        let data = try Data.init(contentsOf: fileURL)
+        self = try decoder.decode(Configuration.self, from: data)
+    }
+    
+    /// Writes the current configuration as a PropertyList to disk.
+    /// - Parameter fileURL: A file URL to the PList on disk.
+    func write(to fileURL: URL) throws {
+        let encoder = PropertyListEncoder()
 
-        self.defaultBrowser = defaultBrowser
-        self.exceptions = exceptionHosts
+        let data = try encoder.encode(self)
+        try data.write(to: fileURL, options: .atomicWrite)
     }
 }
 
-
 // MARK: - Storage on disk
 extension Configuration {
-    /// Writes the Configuration object to disk
-    func writeToDisk() {
-        self.storage.set(self.defaultBrowser.bundleIdentifier, forKey: kDefaultBrowserStorageKey)
-        self.storage.set(self.exceptions, forKey: kExceptionHostsStorageKey)
-    }
-    
-    /// Creates a new Configuration object based on the one stored on disk
     static var fromDisk: Configuration {
-        return Configuration(fromDisk: true)
+        let appSupportDirectoryFileURL = try? FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+        let userConfigFileURL = appSupportDirectoryFileURL?.appendingPathComponent("BrowserSwitcher/Configuration.plist")
+
+        if let userConfigFileURL = userConfigFileURL,
+            FileManager.default.fileExists(atPath: userConfigFileURL.path) {
+            do {
+                return try Configuration(from: userConfigFileURL)
+            } catch {
+                print("[ERROR] User config file is corrupt.", userConfigFileURL.path)
+                assertionFailure()
+            }
+        }
+
+        print("[INFO] Cannot read user config file at:", userConfigFileURL?.path ?? "?")
+        
+        let defaultConfigFileURL = Bundle.main.url(forResource: "DefaultConfiguration", withExtension: "plist")!
+        return try! self.init(from: defaultConfigFileURL)
+    }
+
+    func writeToDisk() {
+        do {
+            let applicationSupportDirURL = try FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+
+            let appDirURL = applicationSupportDirURL.appendingPathComponent("BrowserSwitcher")
+            try FileManager.default.createDirectory(at: appDirURL, withIntermediateDirectories: true, attributes: nil)
+
+            let configFileURL = appDirURL.appendingPathComponent("Configuration.plist")
+            try self.write(to: configFileURL)
+        } catch {
+            assertionFailure(error.localizedDescription)
+        }
     }
 }

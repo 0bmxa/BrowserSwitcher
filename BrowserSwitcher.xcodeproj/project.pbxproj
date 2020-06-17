@@ -8,26 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		A752623423D5F70A009C3D61 /* DefaultConfiguration.plist in Resources */ = {isa = PBXBuildFile; fileRef = A752623323D5F70A009C3D61 /* DefaultConfiguration.plist */; };
+		A7DE13A1249538FE00D0E048 /* Exception.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7DE13A0249538FE00D0E048 /* Exception.swift */; };
 		EE6466E3205FC40000BE0F34 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6466E2205FC40000BE0F34 /* AppDelegate.swift */; };
 		EE6466E5205FC40000BE0F34 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE6466E4205FC40000BE0F34 /* Assets.xcassets */; };
 		EE6466E8205FC40000BE0F34 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE6466E6205FC40000BE0F34 /* MainMenu.xib */; };
-		EE6466F1205FCA4400BE0F34 /* Browser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6466F0205FCA4400BE0F34 /* Browser.swift */; };
 		EE6466F3205FCDC400BE0F34 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6466F2205FCDC400BE0F34 /* Configuration.swift */; };
-		EE8ED4962062F2D2005962E3 /* ExceptionHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8ED4952062F2D2005962E3 /* ExceptionHost.swift */; };
 		EEF379A5224BC64500BA36CC /* EventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF379A4224BC64500BA36CC /* EventHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A752623323D5F70A009C3D61 /* DefaultConfiguration.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = DefaultConfiguration.plist; sourceTree = "<group>"; };
+		A7DE13A0249538FE00D0E048 /* Exception.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exception.swift; sourceTree = "<group>"; };
 		EE6466DF205FC40000BE0F34 /* BrowserSwitcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BrowserSwitcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE6466E2205FC40000BE0F34 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EE6466E4205FC40000BE0F34 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EE6466E7205FC40000BE0F34 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		EE6466E9205FC40000BE0F34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EE6466EA205FC40000BE0F34 /* BrowserSwitcher.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BrowserSwitcher.entitlements; sourceTree = "<group>"; };
-		EE6466F0205FCA4400BE0F34 /* Browser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Browser.swift; sourceTree = "<group>"; };
 		EE6466F2205FCDC400BE0F34 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
-		EE8ED4952062F2D2005962E3 /* ExceptionHost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExceptionHost.swift; sourceTree = "<group>"; };
 		EEF379A4224BC64500BA36CC /* EventHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -63,9 +61,8 @@
 			children = (
 				EE6466E2205FC40000BE0F34 /* AppDelegate.swift */,
 				EEF379A4224BC64500BA36CC /* EventHandler.swift */,
-				EE6466F0205FCA4400BE0F34 /* Browser.swift */,
 				EE6466F2205FCDC400BE0F34 /* Configuration.swift */,
-				EE8ED4952062F2D2005962E3 /* ExceptionHost.swift */,
+				A7DE13A0249538FE00D0E048 /* Exception.swift */,
 				EE6466E4205FC40000BE0F34 /* Assets.xcassets */,
 				EE6466E6205FC40000BE0F34 /* MainMenu.xib */,
 				EE6466E9205FC40000BE0F34 /* Info.plist */,
@@ -101,7 +98,7 @@
 		EE6466D7205FC40000BE0F34 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0920;
+				LastSwiftUpdateCheck = 1120;
 				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = 0bmxa;
 				TargetAttributes = {
@@ -147,11 +144,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EE6466F1205FCA4400BE0F34 /* Browser.swift in Sources */,
 				EE6466E3205FC40000BE0F34 /* AppDelegate.swift in Sources */,
 				EE6466F3205FCDC400BE0F34 /* Configuration.swift in Sources */,
-				EE8ED4962062F2D2005962E3 /* ExceptionHost.swift in Sources */,
 				EEF379A5224BC64500BA36CC /* EventHandler.swift in Sources */,
+				A7DE13A1249538FE00D0E048 /* Exception.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

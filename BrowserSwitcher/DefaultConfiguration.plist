@@ -2,26 +2,26 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>defaultBrowser</key>
+	<key>defaultBrowserBundleID</key>
 	<string>org.mozilla.firefox</string>
 	<key>exceptions</key>
 	<array>
 		<dict>
 			<key>host</key>
 			<string>*.google.com</string>
-			<key>browser</key>
+			<key>browserBundleID</key>
 			<string>com.google.Chrome</string>
 		</dict>
 		<dict>
 			<key>host</key>
 			<string>goo.gl</string>
-			<key>browser</key>
+			<key>browserBundleID</key>
 			<string>com.google.Chrome</string>
 		</dict>
 		<dict>
 			<key>host</key>
 			<string>open.spotify.com</string>
-			<key>browser</key>
+			<key>browserBundleID</key>
 			<string>com.spotify.client</string>
 			<key>transformation</key>
 			<dict>
@@ -43,28 +43,5 @@
 			</dict>
 		</dict>
 	</array>
-	<key>browsers</key>
-	<dict>
-		<key>com.google.Chrome</key>
-		<dict>
-			<key>name</key>
-			<string>Chrome</string>
-		</dict>
-		<key>org.mozilla.firefox</key>
-		<dict>
-			<key>name</key>
-			<string>Firefox</string>
-		</dict>
-		<key>com.apple.Safari</key>
-		<dict>
-			<key>name</key>
-			<string>Safari</string>
-		</dict>
-		<key>com.spotify.client</key>
-		<dict>
-			<key>name</key>
-			<string>Spotify</string>
-		</dict>
-	</dict>
 </dict>
 </plist>

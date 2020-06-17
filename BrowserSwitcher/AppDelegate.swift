@@ -17,16 +17,25 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private var appWasLaunchedManually: Bool = false
     
     func applicationWillFinishLaunching(_ notification: Notification) {
-        let eventHandler = EventHandler(appDelegate: self)
+        // Load config from disk
+        let config = Configuration.fromDisk
+        
+        let eventHandler = EventHandler(appDelegate: self, config: config)
         self.eventHandler = eventHandler
         
-        NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(AppDelegate.handleAppOpen), forEventClass: kCoreEventClass, andEventID: kAEOpenApplication)
-        NSAppleEventManager.shared().setEventHandler(eventHandler, andSelector: #selector(EventHandler.handleGetURLEvent), forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL))
-        NSAppleEventManager.shared().setEventHandler(eventHandler, andSelector: #selector(EventHandler.handleFileOpen), forEventClass: kCoreEventClass, andEventID: kAEOpenDocuments)
+        self.setEventHandler(#selector(eventHandler.handleAppOpen),     eventClass: kCoreEventClass, eventID: kAEOpenApplication)
+        self.setEventHandler(#selector(eventHandler.handleGetURLEvent), eventClass: AEEventClass(kInternetEventClass), eventID: AEEventID(kAEGetURL))
+        self.setEventHandler(#selector(eventHandler.handleFileOpen),    eventClass: kCoreEventClass, eventID: kAEOpenDocuments)
     }
     
+    func setEventHandler(_ selector: Selector, eventClass: AEEventClass, eventID: AEEventID) {
+        guard let eventHandler = self.eventHandler else { fatalError() }
+        let eventManager = NSAppleEventManager.shared()
+        eventManager.setEventHandler(eventHandler, andSelector: selector, forEventClass: eventClass, andEventID: eventID)
+    }
+
     /// Handles manual app launches
-    @objc func handleAppOpen(event: NSAppleEventDescriptor, replyEvent: NSAppleEventDescriptor) {
+    func handleAppOpen() {
         self.appWasLaunchedManually = true
         self.showWindow()
         

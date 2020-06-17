@@ -12,60 +12,39 @@ class EventHandler {
     private let config: Configuration
     private weak var appDelegate: AppDelegate?
     
-    init(appDelegate: AppDelegate) {
+    init(appDelegate: AppDelegate, config: Configuration) {
         self.appDelegate = appDelegate
-        
-        // Load config from disk (not working yet, as never saved)
-        //self.config = Configuration.fromDisk
-        
-        // Some custom config
-        let spotify = Browser(bundleIdentifier: "com.spotify.client")
-        let exceptions: [ExceptionHost] = [
-            ExceptionHost(host: "*.google.com", browser: .chrome),
-            ExceptionHost(host: "goo.gl", browser: .chrome),
-            ExceptionHost(host: "open.spotify.com", browser: spotify, transformation: (search: "https://open.spotify.com/", replace: "spotify:")),
-            ExceptionHost(host: "m.facebook.com", transformation: (search: "m.facebook.com", replace: "facebook.com"))
-        ]
-        self.config = Configuration(defaultBrowser: .firefox, exceptions: exceptions)
+        self.config = config
     }
-
     
-    /// Handles manual app launches
+    /// Handles manual app launches.
     @objc func handleAppOpen(event: NSAppleEventDescriptor, replyEvent: NSAppleEventDescriptor) {
-        self.appDelegate?.showWindow()
+        self.appDelegate?.handleAppOpen()
     }
 
-    /// Handles launches via URL
+    /// Handles launches via URL.
     @objc func handleGetURLEvent(event: NSAppleEventDescriptor, replyEvent: NSAppleEventDescriptor) {
         // No matter how we exit, always close app
         defer { self.appDelegate?.suggestToQuitApp() }
         
         // Get URL from event
-        guard
-            let urlString = event.paramDescriptor(forKeyword: keyDirectObject)?.stringValue,
-            var url = URL(string: urlString)
-            else { return }
+        guard var url = event.url else { return }
         
         // If current host is not in the list of exceptions, open default browser
         guard
             let host = url.host,
-            let exception = self.config.exceptions.first(where: { $0.hostEquals(host) })
-            else {
-                self.open(url: url, with: self.config.defaultBrowser)
-                return
+            let exception = self.config.exceptions.first(where: { $0.matches(host: host) })
+        else {
+            self.open(url: url, with: self.config.defaultBrowserBundleID)
+            return
         }
         
         
         // Apply URL transformation, if defined
-        if let transformation = exception.transformation {
-            let newURLString = urlString.replacingOccurrences(of: transformation.search, with: transformation.replace)
-            if let newURL = URL(string: newURLString) {
-                url = newURL
-            }
-        }
+        url = exception.applyTransformation(to: url)
         
         // Open browser
-        let browser = exception.browser ?? self.config.defaultBrowser
+        let browser = exception.browserBundleID ?? self.config.defaultBrowserBundleID
         self.open(url: url, with: browser)
     }
     
@@ -75,18 +54,27 @@ class EventHandler {
         defer { self.appDelegate?.suggestToQuitApp() }
         
         // Get URL from event
-        guard
-            let urlString = event.paramDescriptor(forKeyword: keyDirectObject)?.stringValue,
-            let url = URL(string: urlString)
-            else { return }
+        guard let url = event.url else { return }
         
         // Open default browser
-        self.open(url: url, with: self.config.defaultBrowser)
+        self.open(url: url, with: self.config.defaultBrowserBundleID)
     }
     
     
     /// Opens a URL in a specified browser
-    private func open(url: URL, with browser: Browser) {
-        NSWorkspace.shared.open([url], withAppBundleIdentifier: browser.bundleIdentifier, options: [.async], additionalEventParamDescriptor: nil, launchIdentifiers: nil)
+    private func open(url: URL, with browserBundleID: String) {
+        NSWorkspace.shared.open([url], withAppBundleIdentifier: browserBundleID, options: [.async], additionalEventParamDescriptor: nil, launchIdentifiers: nil)
+    }
+}
+
+
+extension NSAppleEventDescriptor {
+    /// Get URL from event, if available
+    var url: URL? {
+        guard
+            let directObject = self.paramDescriptor(forKeyword: keyDirectObject),
+            let urlString = directObject.stringValue
+        else { return nil }
+        return URL(string: urlString)
     }
 }
