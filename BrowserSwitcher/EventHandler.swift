@@ -8,7 +8,7 @@
 
 import AppKit
 
-class EventHandler {
+internal class EventHandler {
     private let config: Configuration
     private weak var appDelegate: AppDelegate?
 
@@ -18,12 +18,14 @@ class EventHandler {
     }
 
     /// Handles manual app launches.
-    @objc func handleAppOpen(event: NSAppleEventDescriptor, replyEvent: NSAppleEventDescriptor) {
+    @objc
+    func handleAppOpen(event: NSAppleEventDescriptor, replyEvent: NSAppleEventDescriptor) {
         self.appDelegate?.handleAppOpen()
     }
 
     /// Handles launches via URL.
-    @objc func handleGetURLEvent(event: NSAppleEventDescriptor, replyEvent: NSAppleEventDescriptor) {
+    @objc
+    func handleGetURLEvent(event: NSAppleEventDescriptor, replyEvent: NSAppleEventDescriptor) {
         // No matter how we exit, always close app
         defer { self.appDelegate?.suggestToQuitApp() }
 
@@ -48,7 +50,8 @@ class EventHandler {
     }
 
     /// Handles launches with a local document
-    @objc func handleFileOpen(event: NSAppleEventDescriptor, replyEvent: NSAppleEventDescriptor) {
+    @objc
+    func handleFileOpen(event: NSAppleEventDescriptor, replyEvent: NSAppleEventDescriptor) {
         // No matter how we exit, always close app
         defer { self.appDelegate?.suggestToQuitApp() }
 

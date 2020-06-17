@@ -11,7 +11,7 @@ import Foundation
 /// A data structure describing when an exception to the default URL-open
 /// bahavior should be made.
 /// (Default behavior: default browser opens the URL as-is.)
-struct Exception: Codable {
+internal struct Exception: Codable {
     /// A simple search-replace URL transformation.
     struct Transformation: Codable {
         let search: String

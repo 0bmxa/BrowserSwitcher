@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Configuration: Codable {
+internal struct Configuration: Codable {
     /// The bundle ID for the default browser.
     let defaultBrowserBundleID: String
     /// An array of exceptions to the default opening behavior.
@@ -28,7 +28,7 @@ struct Configuration: Codable {
     init(from fileURL: URL) throws {
         let decoder = PropertyListDecoder()
 
-        let data = try Data.init(contentsOf: fileURL)
+        let data = try Data(contentsOf: fileURL)
         self = try decoder.decode(Configuration.self, from: data)
     }
 
@@ -45,17 +45,10 @@ struct Configuration: Codable {
 // MARK: - Storage on disk
 extension Configuration {
     static var fromDisk: Configuration {
-        let appSupportDirectoryFileURL = try? FileManager.default.url(
-            for: .applicationSupportDirectory,
-            in: .userDomainMask,
-            appropriateFor: nil,
-            create: false
-        )
-        let userConfigFileURL = appSupportDirectoryFileURL?
-            .appendingPathComponent("BrowserSwitcher/Configuration.plist")
+        let userConfigFileURL = FileManager.default
+            .urlInUserAppSupportDir(path: "BrowserSwitcher/Configuration.plist")
 
-        if let userConfigFileURL = userConfigFileURL,
-            FileManager.default.fileExists(atPath: userConfigFileURL.path) {
+        if FileManager.default.fileExists(atPath: userConfigFileURL.path) {
             do {
                 return try Configuration(from: userConfigFileURL)
             } catch {
@@ -64,32 +57,42 @@ extension Configuration {
             }
         }
 
-        print("[INFO] Cannot read user config file at:", userConfigFileURL?.path ?? "?")
+        print("[INFO] Cannot read user config file at:", userConfigFileURL.path)
 
-        let defaultConfigFileURL = Bundle.main.url(forResource: "DefaultConfiguration", withExtension: "plist")!
+        let defaultConfigFileURL = Bundle.main
+            .url(forResource: "DefaultConfiguration", withExtension: "plist")
         do {
-            return try self.init(from: defaultConfigFileURL)
+            guard let fileURL = defaultConfigFileURL else { throw NSError() }
+            return try self.init(from: fileURL)
         } catch {
+            print("[ERROR] Cannot read default config file at:", userConfigFileURL.path)
+            assertionFailure()
             return Configuration(defaultBrowserBundleID: "com.apple.Safari", exceptions: [])
         }
     }
 
     func writeToDisk() {
         do {
-            let applicationSupportDirURL = try FileManager.default.url(
-                for: .applicationSupportDirectory,
-                in: .userDomainMask,
-                appropriateFor: nil,
-                create: true
-            )
-
-            let appDirURL = applicationSupportDirURL.appendingPathComponent("BrowserSwitcher")
-            try FileManager.default.createDirectory(at: appDirURL, withIntermediateDirectories: true, attributes: nil)
+            let fileManager = FileManager.default
+            let appDirURL = fileManager.urlInUserAppSupportDir(path: "BrowserSwitcher")
+            try fileManager.createDirectory(at: appDirURL, withIntermediateDirectories: true)
 
             let configFileURL = appDirURL.appendingPathComponent("Configuration.plist")
             try self.write(to: configFileURL)
         } catch {
             assertionFailure(error.localizedDescription)
         }
+    }
+}
+
+extension FileManager {
+    func urlInUserAppSupportDir(path pathComponent: String) -> URL {
+        let appSupportDirURL = try? FileManager.default.url(
+            for: .applicationSupportDirectory,
+            in: .userDomainMask,
+            appropriateFor: nil,
+            create: false
+        )
+        return appSupportDirURL!.appendingPathComponent(pathComponent)
     }
 }

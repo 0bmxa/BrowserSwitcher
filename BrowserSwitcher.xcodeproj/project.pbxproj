@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A752623423D5F70A009C3D61 /* DefaultConfiguration.plist in Resources */ = {isa = PBXBuildFile; fileRef = A752623323D5F70A009C3D61 /* DefaultConfiguration.plist */; };
 		A7DE13A1249538FE00D0E048 /* Exception.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7DE13A0249538FE00D0E048 /* Exception.swift */; };
+		A7DE13B2249A864800D0E048 /* NSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7DE13B1249A864800D0E048 /* NSView.swift */; };
 		EE6466E3205FC40000BE0F34 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6466E2205FC40000BE0F34 /* AppDelegate.swift */; };
 		EE6466E5205FC40000BE0F34 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE6466E4205FC40000BE0F34 /* Assets.xcassets */; };
 		EE6466E8205FC40000BE0F34 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE6466E6205FC40000BE0F34 /* MainMenu.xib */; };
@@ -19,6 +20,7 @@
 /* Begin PBXFileReference section */
 		A752623323D5F70A009C3D61 /* DefaultConfiguration.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = DefaultConfiguration.plist; sourceTree = "<group>"; };
 		A7DE13A0249538FE00D0E048 /* Exception.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exception.swift; sourceTree = "<group>"; };
+		A7DE13B1249A864800D0E048 /* NSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSView.swift; sourceTree = "<group>"; };
 		EE6466DF205FC40000BE0F34 /* BrowserSwitcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BrowserSwitcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE6466E2205FC40000BE0F34 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EE6466E4205FC40000BE0F34 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -40,6 +42,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A7DE13B3249A86D400D0E048 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A7DE13B1249A864800D0E048 /* NSView.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		EE6466D6205FC40000BE0F34 = {
 			isa = PBXGroup;
 			children = (
@@ -63,6 +73,7 @@
 				EEF379A4224BC64500BA36CC /* EventHandler.swift */,
 				EE6466F2205FCDC400BE0F34 /* Configuration.swift */,
 				A7DE13A0249538FE00D0E048 /* Exception.swift */,
+				A7DE13B3249A86D400D0E048 /* Extensions */,
 				EE6466E4205FC40000BE0F34 /* Assets.xcassets */,
 				EE6466E6205FC40000BE0F34 /* MainMenu.xib */,
 				EE6466E9205FC40000BE0F34 /* Info.plist */,
@@ -169,6 +180,7 @@
 				EE6466E3205FC40000BE0F34 /* AppDelegate.swift in Sources */,
 				EE6466F3205FCDC400BE0F34 /* Configuration.swift in Sources */,
 				EEF379A5224BC64500BA36CC /* EventHandler.swift in Sources */,
+				A7DE13B2249A864800D0E048 /* NSView.swift in Sources */,
 				A7DE13A1249538FE00D0E048 /* Exception.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

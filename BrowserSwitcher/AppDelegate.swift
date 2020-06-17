@@ -6,15 +6,15 @@
 //  Copyright © 2018 0bmxa. All rights reserved.
 //
 
-import Cocoa
 import Carbon
+import Cocoa
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
-    @IBOutlet private weak var window: NSWindow!
-
+internal class AppDelegate: NSObject, NSApplicationDelegate {
     private var eventHandler: EventHandler?
     private var appWasLaunchedManually: Bool = false
+
+    @IBOutlet private var window: NSWindow!
 
     func applicationWillFinishLaunching(_ notification: Notification) {
         // Load config from disk
@@ -74,18 +74,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     /// Registers the app as default handler for http: and https: url schemes
     internal func registerDefaultBrowser() {
-        guard let bundleID = Bundle.main.bundleIdentifier else { assertionFailure(); return }
+        guard let bundleID = Bundle.main.bundleIdentifier
+            else { assertionFailure(); return }
 
         LSSetDefaultHandlerForURLScheme("http"  as CFString, bundleID as CFString)
         LSSetDefaultHandlerForURLScheme("https" as CFString, bundleID as CFString)
     }
 
-    /// Checks whether the app is registered as default handler for http: and https: url schemes
+    /// Checks whether the app is registered as default handler
+    /// for http: and https: url schemes
     internal func isDefaultBrowser() -> Bool {
-        guard let bundleID = Bundle.main.bundleIdentifier else { assertionFailure(); return false }
+        guard let bundleID = Bundle.main.bundleIdentifier
+            else { assertionFailure(); return false }
 
-        let defaultHTTPHandler  = LSCopyDefaultHandlerForURLScheme("http"  as CFString)?.takeRetainedValue()
-        let defaultHTTPSHandler = LSCopyDefaultHandlerForURLScheme("https" as CFString)?.takeRetainedValue()
+        let defaultHTTPHandler =
+            LSCopyDefaultHandlerForURLScheme("http" as CFString)?.takeRetainedValue()
+        let defaultHTTPSHandler =
+            LSCopyDefaultHandlerForURLScheme("https" as CFString)?.takeRetainedValue()
 
         let cfBundleID = bundleID as CFString
         return (defaultHTTPHandler == cfBundleID) && (defaultHTTPSHandler == cfBundleID)
@@ -94,7 +99,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 // MARK: - "Window controller"
 extension AppDelegate {
-
     private func removeTitleBar() {
         guard let window = self.window else { return }
 
@@ -114,9 +118,6 @@ extension AppDelegate {
 
         visualEffect.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(visualEffect, positioned: .below, relativeTo: nil)
-        visualEffect.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        visualEffect.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        visualEffect.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-        visualEffect.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        visualEffect.setAnchors(equalTo: contentView)
     }
 }
