@@ -10,11 +10,13 @@ import AppKit
 
 internal class EventHandler {
     private let config: Configuration
+    private let configFileManager: ConfigFileManager
     private weak var appDelegate: AppDelegate?
 
-    init(appDelegate: AppDelegate, config: Configuration) {
+    init(appDelegate: AppDelegate, configFileManager: ConfigFileManager) {
         self.appDelegate = appDelegate
-        self.config = config
+        self.configFileManager = configFileManager
+        self.config = configFileManager.read()
     }
 
     /// Handles manual app launches.
@@ -62,25 +64,25 @@ internal class EventHandler {
         self.open(url: url, with: self.config.defaultBrowserBundleID)
     }
 
+    /// Handles requests to write the config file to disk.
+    internal func handleConfigFileWrite() {
+        let success = self.configFileManager.write(config: self.config, overwrite: false)
+        if success {
+            let url = self.configFileManager.userURL
+            NSWorkspace.shared.activateFileViewerSelecting([url])
+        }
+    }
+
     /// Opens a URL in a specified browser
-    private func open(url: URL, with browserBundleID: String) {
-        NSWorkspace.shared.open(
+    @discardableResult
+    private func open(url: URL, with browserBundleID: String) -> Bool {
+        let success = NSWorkspace.shared.open(
             [url],
             withAppBundleIdentifier: browserBundleID,
             options: [.async],
             additionalEventParamDescriptor: nil,
             launchIdentifiers: nil
         )
-    }
-}
-
-extension NSAppleEventDescriptor {
-    /// Get URL from event, if available
-    var url: URL? {
-        guard
-            let directObject = self.paramDescriptor(forKeyword: keyDirectObject),
-            let urlString = directObject.stringValue
-        else { return nil }
-        return URL(string: urlString)
+        return success
     }
 }

@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		A752623423D5F70A009C3D61 /* DefaultConfiguration.plist in Resources */ = {isa = PBXBuildFile; fileRef = A752623323D5F70A009C3D61 /* DefaultConfiguration.plist */; };
+		A7685E79249A98F2008C1E89 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7685E78249A98F2008C1E89 /* FileManager.swift */; };
+		A7685E7B249A99A1008C1E89 /* NSAppleEventDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7685E7A249A99A1008C1E89 /* NSAppleEventDescriptor.swift */; };
+		A7685E7D24A8E8CC008C1E89 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7685E7C24A8E8CC008C1E89 /* Log.swift */; };
+		A7685E7F24B24FF8008C1E89 /* ConfigFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7685E7E24B24FF7008C1E89 /* ConfigFileManager.swift */; };
 		A7DE13A1249538FE00D0E048 /* Exception.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7DE13A0249538FE00D0E048 /* Exception.swift */; };
 		A7DE13B2249A864800D0E048 /* NSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7DE13B1249A864800D0E048 /* NSView.swift */; };
 		EE6466E3205FC40000BE0F34 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6466E2205FC40000BE0F34 /* AppDelegate.swift */; };
@@ -19,6 +23,10 @@
 
 /* Begin PBXFileReference section */
 		A752623323D5F70A009C3D61 /* DefaultConfiguration.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = DefaultConfiguration.plist; sourceTree = "<group>"; };
+		A7685E78249A98F2008C1E89 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
+		A7685E7A249A99A1008C1E89 /* NSAppleEventDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAppleEventDescriptor.swift; sourceTree = "<group>"; };
+		A7685E7C24A8E8CC008C1E89 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		A7685E7E24B24FF7008C1E89 /* ConfigFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigFileManager.swift; sourceTree = "<group>"; };
 		A7DE13A0249538FE00D0E048 /* Exception.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exception.swift; sourceTree = "<group>"; };
 		A7DE13B1249A864800D0E048 /* NSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSView.swift; sourceTree = "<group>"; };
 		EE6466DF205FC40000BE0F34 /* BrowserSwitcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BrowserSwitcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -46,6 +54,8 @@
 			isa = PBXGroup;
 			children = (
 				A7DE13B1249A864800D0E048 /* NSView.swift */,
+				A7685E78249A98F2008C1E89 /* FileManager.swift */,
+				A7685E7A249A99A1008C1E89 /* NSAppleEventDescriptor.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -72,7 +82,9 @@
 				EE6466E2205FC40000BE0F34 /* AppDelegate.swift */,
 				EEF379A4224BC64500BA36CC /* EventHandler.swift */,
 				EE6466F2205FCDC400BE0F34 /* Configuration.swift */,
+				A7685E7E24B24FF7008C1E89 /* ConfigFileManager.swift */,
 				A7DE13A0249538FE00D0E048 /* Exception.swift */,
+				A7685E7C24A8E8CC008C1E89 /* Log.swift */,
 				A7DE13B3249A86D400D0E048 /* Extensions */,
 				EE6466E4205FC40000BE0F34 /* Assets.xcassets */,
 				EE6466E6205FC40000BE0F34 /* MainMenu.xib */,
@@ -179,9 +191,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE6466E3205FC40000BE0F34 /* AppDelegate.swift in Sources */,
+				A7685E7B249A99A1008C1E89 /* NSAppleEventDescriptor.swift in Sources */,
 				EE6466F3205FCDC400BE0F34 /* Configuration.swift in Sources */,
 				EEF379A5224BC64500BA36CC /* EventHandler.swift in Sources */,
+				A7685E79249A98F2008C1E89 /* FileManager.swift in Sources */,
 				A7DE13B2249A864800D0E048 /* NSView.swift in Sources */,
+				A7685E7D24A8E8CC008C1E89 /* Log.swift in Sources */,
+				A7685E7F24B24FF8008C1E89 /* ConfigFileManager.swift in Sources */,
 				A7DE13A1249538FE00D0E048 /* Exception.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

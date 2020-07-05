@@ -18,9 +18,8 @@ internal class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationWillFinishLaunching(_ notification: Notification) {
         // Load config from disk
-        let config = Configuration.fromDisk
-
-        let eventHandler = EventHandler(appDelegate: self, config: config)
+        let configFileManager = ConfigFileManager()
+        let eventHandler = EventHandler(appDelegate: self, configFileManager: configFileManager)
         self.eventHandler = eventHandler
 
         NSAppleEventManager.shared().setEventHandler(
@@ -32,8 +31,8 @@ internal class AppDelegate: NSObject, NSApplicationDelegate {
         NSAppleEventManager.shared().setEventHandler(
             eventHandler,
             andSelector: #selector(eventHandler.handleGetURLEvent),
-            forEventClass: AEEventClass(kInternetEventClass),
-            andEventID: AEEventID(kAEGetURL)
+            forEventClass: kAEInternetEventClass,
+            andEventID: kAEGetURLEventID
         )
         NSAppleEventManager.shared().setEventHandler(
             eventHandler,
@@ -119,5 +118,9 @@ extension AppDelegate {
         visualEffect.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(visualEffect, positioned: .below, relativeTo: nil)
         visualEffect.setAnchors(equalTo: contentView)
+    }
+
+    @IBAction private func createConfigButtonClicked(_ sender: NSButton) {
+        self.eventHandler?.handleConfigFileWrite()
     }
 }
