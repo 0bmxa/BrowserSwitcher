@@ -98,6 +98,10 @@ internal class AppDelegate: NSObject, NSApplicationDelegate {
 
 // MARK: - "Window controller"
 extension AppDelegate {
+    @IBAction private func createConfigButtonClicked(_ sender: NSButton) {
+        self.eventHandler?.handleConfigFileWrite()
+    }
+
     private func removeTitleBar() {
         guard let window = self.window else { return }
 
@@ -118,9 +122,5 @@ extension AppDelegate {
         visualEffect.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(visualEffect, positioned: .below, relativeTo: nil)
         visualEffect.setAnchors(equalTo: contentView)
-    }
-
-    @IBAction private func createConfigButtonClicked(_ sender: NSButton) {
-        self.eventHandler?.handleConfigFileWrite()
     }
 }

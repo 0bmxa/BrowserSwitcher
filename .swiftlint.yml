@@ -1,4 +1,6 @@
 line_length: 96
+vertical_whitespace:
+    max_empty_lines: 2
 
 opt_in_rules:
     - anyobject_protocol

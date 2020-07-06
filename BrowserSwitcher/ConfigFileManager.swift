@@ -21,6 +21,7 @@ internal struct ConfigFileManager {
         self.userURL = FileManager.default
             .urlInUserAppSupportDir(path: "BrowserSwitcher/Configuration.plist")
         self.defaultURL = Bundle.main
+            //swiftlint:disable:next force_unwrapping
             .url(forResource: "DefaultConfiguration", withExtension: "plist")!
     }
 

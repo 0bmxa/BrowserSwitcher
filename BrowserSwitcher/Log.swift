@@ -10,7 +10,7 @@ import Foundation
 
 //swiftlint:disable line_length
 
-internal class Log {
+internal enum Log {
     enum Level: String {
         case error = "ERROR"
         case warn  = "WARN"
@@ -24,7 +24,6 @@ internal class Log {
         let timestamp = Date()
     }
 
-    private static let shared = Log()
     private static var trail: [Trail] = []
 
     internal static func error(_ items: Any..., file: String = #file, function: String = #function, line: Int = #line) {
@@ -56,13 +55,14 @@ internal class Log {
 
     private static func print(
         _ items: [Any],
-        separator: String = " ",
-        terminator: String = "\n",
         file: String,
         function: String,
         line: Int,
         level: Level
     ) {
+        let separator: String = " "
+        let terminator: String = "\n"
+
         let fileName = file.split(separator: "/").last ?? ""
         let functionName = function.split(separator: "(")[0]
         let prefix = "\(fileName)/\(functionName):\(line): [\(level.rawValue)]"

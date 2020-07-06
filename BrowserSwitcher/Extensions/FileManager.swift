@@ -16,6 +16,7 @@ extension FileManager {
             appropriateFor: nil,
             create: false
         )
+        //swiftlint:disable:next force_unwrapping
         return appSupportDirURL!.appendingPathComponent(pathComponent)
     }
 }
