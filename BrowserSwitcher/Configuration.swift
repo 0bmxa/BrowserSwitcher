@@ -8,9 +8,14 @@
 
 import Foundation
 
+internal typealias BundleID = String
+
 internal struct Configuration: Codable {
+    /// Creates a generic, empty configuration.
+    static let generic = Configuration(defaultBrowserBundleID: "com.apple.Safari", exceptions: [])
+
     /// The bundle ID for the default browser.
-    let defaultBrowserBundleID: String
+    let defaultBrowserBundleID: BundleID
     /// An array of exceptions to the default opening behavior.
     let exceptions: [Exception]
 

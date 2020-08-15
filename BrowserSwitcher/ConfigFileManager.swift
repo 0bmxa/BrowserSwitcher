@@ -8,9 +8,10 @@
 
 import Foundation
 
-internal struct ConfigFileManager {
+internal class ConfigFileManager {
     internal let userURL: URL
     private let defaultURL: URL
+    private var cachedConfig: Configuration?
 
     private var userConfigFileExists: Bool {
         let path = self.userURL.path
@@ -18,20 +19,24 @@ internal struct ConfigFileManager {
     }
 
     init() {
-        self.userURL = FileManager.default
-            .urlInUserAppSupportDir(path: "BrowserSwitcher/Configuration.plist")
-        self.defaultURL = Bundle.main
-            //swiftlint:disable:next force_unwrapping
-            .url(forResource: "DefaultConfiguration", withExtension: "plist")!
+        self.userURL = FileManager.default.urlInUserAppSupportDir(path: "BrowserSwitcher/Configuration.plist")
+        //swiftlint:disable:next force_unwrapping
+        self.defaultURL = Bundle.main.url(forResource: "DefaultConfiguration", withExtension: "plist")!
     }
 
     /// Reads a configuration from disk. First attempts to read the user config
     /// file; in case this fails reads the default config file.
     func read() -> Configuration {
+        if let cachedConfig = self.cachedConfig {
+            return cachedConfig
+        }
+
         if self.userConfigFileExists {
             do {
                 let data = try Data(contentsOf: self.userURL)
-                return try self.decode(from: data)
+                let config: Configuration = try self.decode(from: data)
+                self.cachedConfig = config
+                return config
             } catch {
                 Log.error("User config file is corrupt.", userURL)
                 assertionFailure()
@@ -42,11 +47,13 @@ internal struct ConfigFileManager {
 
         do {
             let data = try Data(contentsOf: self.defaultURL)
-            return try self.decode(from: data)
+            let config: Configuration = try self.decode(from: data)
+            self.cachedConfig = config
+            return config
         } catch {
             Log.error("Cannot read default config file at:", userURL)
             assertionFailure()
-            return Configuration(defaultBrowserBundleID: "com.apple.Safari", exceptions: [])
+            return Configuration.generic
         }
     }
 
@@ -64,6 +71,7 @@ internal struct ConfigFileManager {
             let data = try self.encode(value: config)
             try data.write(to: self.userURL, options: .atomicWrite)
 
+            self.cachedConfig = nil
             return true
         } catch {
             assertionFailure(error.localizedDescription)

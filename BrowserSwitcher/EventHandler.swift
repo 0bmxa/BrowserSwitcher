@@ -44,7 +44,9 @@ internal class EventHandler {
         }
 
         // Apply URL transformation, if defined
-        url = exception.applyTransformation(to: url)
+        if let transformation = exception.transformation {
+            url = url.transformed(by: transformation)
+        }
 
         // Open browser
         let browser = exception.browserBundleID ?? self.config.defaultBrowserBundleID

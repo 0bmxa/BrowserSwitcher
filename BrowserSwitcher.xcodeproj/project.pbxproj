@@ -12,6 +12,10 @@
 		A7685E7B249A99A1008C1E89 /* NSAppleEventDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7685E7A249A99A1008C1E89 /* NSAppleEventDescriptor.swift */; };
 		A7685E7D24A8E8CC008C1E89 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7685E7C24A8E8CC008C1E89 /* Log.swift */; };
 		A7685E7F24B24FF8008C1E89 /* ConfigFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7685E7E24B24FF7008C1E89 /* ConfigFileManager.swift */; };
+		A76F718C24D6F49C00B2E8A1 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76F718B24D6F49C00B2E8A1 /* TableViewController.swift */; };
+		A76F718E24D6F7C300B2E8A1 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76F718D24D6F7C300B2E8A1 /* MainWindowController.swift */; };
+		A76F719124D7395600B2E8A1 /* NSWorkspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76F719024D7395600B2E8A1 /* NSWorkspace.swift */; };
+		A7DBF31224E821B70076D03B /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7DBF31124E821B70076D03B /* URL.swift */; };
 		A7DE13A1249538FE00D0E048 /* Exception.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7DE13A0249538FE00D0E048 /* Exception.swift */; };
 		A7DE13B2249A864800D0E048 /* NSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7DE13B1249A864800D0E048 /* NSView.swift */; };
 		EE6466E3205FC40000BE0F34 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6466E2205FC40000BE0F34 /* AppDelegate.swift */; };
@@ -27,6 +31,10 @@
 		A7685E7A249A99A1008C1E89 /* NSAppleEventDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAppleEventDescriptor.swift; sourceTree = "<group>"; };
 		A7685E7C24A8E8CC008C1E89 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		A7685E7E24B24FF7008C1E89 /* ConfigFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigFileManager.swift; sourceTree = "<group>"; };
+		A76F718B24D6F49C00B2E8A1 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		A76F718D24D6F7C300B2E8A1 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
+		A76F719024D7395600B2E8A1 /* NSWorkspace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSWorkspace.swift; sourceTree = "<group>"; };
+		A7DBF31124E821B70076D03B /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		A7DE13A0249538FE00D0E048 /* Exception.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exception.swift; sourceTree = "<group>"; };
 		A7DE13B1249A864800D0E048 /* NSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSView.swift; sourceTree = "<group>"; };
 		EE6466DF205FC40000BE0F34 /* BrowserSwitcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BrowserSwitcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -50,12 +58,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A76F718F24D71A8B00B2E8A1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A76F718D24D6F7C300B2E8A1 /* MainWindowController.swift */,
+				A76F718B24D6F49C00B2E8A1 /* TableViewController.swift */,
+				EE6466E6205FC40000BE0F34 /* MainMenu.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		A7DE13B3249A86D400D0E048 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				A7DE13B1249A864800D0E048 /* NSView.swift */,
 				A7685E78249A98F2008C1E89 /* FileManager.swift */,
 				A7685E7A249A99A1008C1E89 /* NSAppleEventDescriptor.swift */,
+				A76F719024D7395600B2E8A1 /* NSWorkspace.swift */,
+				A7DBF31124E821B70076D03B /* URL.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -81,13 +101,13 @@
 			children = (
 				EE6466E2205FC40000BE0F34 /* AppDelegate.swift */,
 				EEF379A4224BC64500BA36CC /* EventHandler.swift */,
-				EE6466F2205FCDC400BE0F34 /* Configuration.swift */,
 				A7685E7E24B24FF7008C1E89 /* ConfigFileManager.swift */,
+				EE6466F2205FCDC400BE0F34 /* Configuration.swift */,
 				A7DE13A0249538FE00D0E048 /* Exception.swift */,
 				A7685E7C24A8E8CC008C1E89 /* Log.swift */,
 				A7DE13B3249A86D400D0E048 /* Extensions */,
 				EE6466E4205FC40000BE0F34 /* Assets.xcassets */,
-				EE6466E6205FC40000BE0F34 /* MainMenu.xib */,
+				A76F718F24D71A8B00B2E8A1 /* View */,
 				EE6466E9205FC40000BE0F34 /* Info.plist */,
 				EE6466EA205FC40000BE0F34 /* BrowserSwitcher.entitlements */,
 				A752623323D5F70A009C3D61 /* DefaultConfiguration.plist */,
@@ -193,10 +213,14 @@
 				EE6466E3205FC40000BE0F34 /* AppDelegate.swift in Sources */,
 				A7685E7B249A99A1008C1E89 /* NSAppleEventDescriptor.swift in Sources */,
 				EE6466F3205FCDC400BE0F34 /* Configuration.swift in Sources */,
+				A76F718C24D6F49C00B2E8A1 /* TableViewController.swift in Sources */,
+				A76F719124D7395600B2E8A1 /* NSWorkspace.swift in Sources */,
+				A7DBF31224E821B70076D03B /* URL.swift in Sources */,
 				EEF379A5224BC64500BA36CC /* EventHandler.swift in Sources */,
 				A7685E79249A98F2008C1E89 /* FileManager.swift in Sources */,
 				A7DE13B2249A864800D0E048 /* NSView.swift in Sources */,
 				A7685E7D24A8E8CC008C1E89 /* Log.swift in Sources */,
+				A76F718E24D6F7C300B2E8A1 /* MainWindowController.swift in Sources */,
 				A7685E7F24B24FF8008C1E89 /* ConfigFileManager.swift in Sources */,
 				A7DE13A1249538FE00D0E048 /* Exception.swift in Sources */,
 			);

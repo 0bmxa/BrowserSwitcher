@@ -22,7 +22,7 @@ internal struct Exception: Codable {
     let host: String
 
     /// The bundle ID of the browser to be used for this exception.
-    let browserBundleID: String?
+    let browserBundleID: BundleID?
 
     /// An optional search-replace transformation to be applied to the URL.
     let transformation: Transformation?
@@ -59,18 +59,5 @@ extension Exception {
         }
 
         return hostsMatch
-    }
-
-    func applyTransformation(to url: URL) -> URL {
-        guard
-            let search = self.transformation?.search,
-            let replace = self.transformation?.replace
-        else { return url }
-
-        let urlString = url.absoluteString
-        let transformedURLString = urlString.replacingOccurrences(of: search, with: replace)
-
-        guard let transformedURL = URL(string: transformedURLString) else { return url }
-        return transformedURL
     }
 }

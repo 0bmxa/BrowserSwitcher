@@ -13,12 +13,12 @@ import Cocoa
 internal class AppDelegate: NSObject, NSApplicationDelegate {
     private var eventHandler: EventHandler?
     private var appWasLaunchedManually: Bool = false
+    private let configFileManager = ConfigFileManager()
 
-    @IBOutlet private var window: NSWindow!
+    @IBOutlet private var windowController: MainWindowController?
 
     func applicationWillFinishLaunching(_ notification: Notification) {
         // Load config from disk
-        let configFileManager = ConfigFileManager()
         let eventHandler = EventHandler(appDelegate: self, configFileManager: configFileManager)
         self.eventHandler = eventHandler
 
@@ -45,7 +45,8 @@ internal class AppDelegate: NSObject, NSApplicationDelegate {
     /// Handles manual app launches
     func handleAppOpen() {
         self.appWasLaunchedManually = true
-        self.showWindow()
+        self.windowController?.configFileManager = self.configFileManager
+        self.windowController?.showWindow()
 
         if !self.isDefaultBrowser() {
             self.registerDefaultBrowser()
@@ -56,18 +57,6 @@ internal class AppDelegate: NSObject, NSApplicationDelegate {
     internal func suggestToQuitApp() {
         if !appWasLaunchedManually {
             NSApp.terminate(nil)
-        }
-    }
-
-    /// Makes the window visible
-    internal func showWindow() {
-        self.window.setIsVisible(true)
-
-        if #available(OSX 10.10, *) {
-            self.removeTitleBar()
-        }
-        if #available(OSX 10.11, *) {
-            self.addTransparency()
         }
     }
 
@@ -93,34 +82,5 @@ internal class AppDelegate: NSObject, NSApplicationDelegate {
 
         let cfBundleID = bundleID as CFString
         return (defaultHTTPHandler == cfBundleID) && (defaultHTTPSHandler == cfBundleID)
-    }
-}
-
-// MARK: - "Window controller"
-extension AppDelegate {
-    @IBAction private func createConfigButtonClicked(_ sender: NSButton) {
-        self.eventHandler?.handleConfigFileWrite()
-    }
-
-    private func removeTitleBar() {
-        guard let window = self.window else { return }
-
-        window.titlebarAppearsTransparent = true
-        window.titleVisibility = .hidden
-        window.styleMask.insert(.fullSizeContentView)
-    }
-
-    @available(OSX 10.11, *)
-    private func addTransparency() {
-        guard let contentView = self.window?.contentView else { return }
-
-        let visualEffect = NSVisualEffectView()
-        visualEffect.blendingMode = .behindWindow
-        visualEffect.state = .active
-        visualEffect.material = .dark
-
-        visualEffect.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(visualEffect, positioned: .below, relativeTo: nil)
-        visualEffect.setAnchors(equalTo: contentView)
     }
 }
